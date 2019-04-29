@@ -1,0 +1,240 @@
+\documentclass[12pt,letterpaper,oneside]{book}
+\usepackage{amsmath, amsthm, amssymb, amsfonts, latexsym, cancel}
+\usepackage{geometry}
+\usepackage[mathscr]{euscript}
+\usepackage{anyfontsize}
+\usepackage[spanish]{babel}
+\usepackage{shapepar}
+\usepackage[utf8]{inputenc}
+\usepackage{fancybox}
+\usepackage{afterpage}
+\usepackage{mathrsfs}
+\usepackage{fancyvrb}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{color}
+\usepackage{enumerate}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{minted}
+\usepackage{caption}
+\usepackage{subfig}
+%\usepackage{subcaption}
+%\usemintedstyle{perldoc}
+\textheight=21.94cm
+\textwidth=15.69cm
+\hoffset=-3mm
+\pagestyle{headings}
+\setcounter{MaxMatrixCols}{30}
+\definecolor{verde}{rgb}{0,0,1}
+\usepackage[pdftex,colorlinks]{hyperref}
+\hypersetup{citecolor=blue,linkcolor=verde}
+\usepackage{tensor}
+\usepackage[T1]{fontenc}
+
+\usepackage{bm}
+
+\newsavebox\MBox
+\newcommand\Cline[2][red]{{\sbox\MBox{$#2$}%
+  \rlap{\usebox\MBox}\color{#1}\rule[-1.2\dp\MBox]{\wd\MBox}{0.5pt}}}
+
+\newcommand{\der}[2]{\frac{d #1}{d #2}}
+\newcommand{\dder}[2]{\frac{d^2 #1}{d #2 ^2}}
+\newcommand{\derp}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\sch}{Schwarzschild}
+\newcommand{\m}{métrica}
+\newcommand{\ein}{Einstein}
+\newcommand{\la}{\mathcal{L}}
+\usepackage{float}
+
+\newcommand\Ccancel[2][black]{\renewcommand\CancelColor{\color{#1}}\cancel{#2}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LO]{\leftmark}
+\fancyhead[RO,LE]{\thepage}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\theoremstyle{plain}
+	\newtheorem{prop}{Proposición}[section]
+	\newtheorem{teor}[prop]{Teorema}
+	\newtheorem{corol}[prop]{Corolario}
+	\newtheorem{lema}[prop]{Lema}
+\theoremstyle{definition}
+	\newtheorem{defin}[prop]{Definición}
+	\newtheorem{ejem}[prop]{Ejemplo}
+\theoremstyle{remark}
+	\newtheorem{obs}[prop]{Observación}
+	
+\renewcommand{\qedsymbol}{$\blacksquare$}
+\newcommand{\C}[1]{\left\lbrace #1\right\rbrace}
+\newcommand{\ET}{{\small\textsc{T}}}
+
+
+\newcommand{\algoritmo}[2]{\hrule
+\vspace{0.5mm}
+\hrule
+\hrule
+\vspace{0.5mm}
+\hrule
+\smallskip
+{\sc #1 }
+\smallskip
+\hrule
+\smallskip
+#2
+\smallskip
+\hrule
+\vspace{0.5mm}
+\hrule
+\hrule
+\vspace{0.5mm}
+\hrule}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\frontmatter
+
+\thispagestyle{empty}
+\begin{center}
+\textbf{{\LARGE Estudio de la turbulencia fotosférica}}\\[7cm]
+
+
+
+
+\textbf{{\Large Johan Sammir Méndez Holguín}}\\[8cm]
+
+Universidad Nacional de Colombia\\[2mm]
+Facultad de Ciencias \\[2mm]
+Observatorio Astronómico Nacional\\[2mm]
+Bogotá D.C., Colombia\\[2mm]
+I Semestre - 2019
+\end{center}
+
+\newpage\null\thispagestyle{empty}\newpage
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+
+\thispagestyle{empty}
+\label{Portada}
+\begin{center}
+\textbf{{\LARGE Estudio de la turbulencia fotosférica}}\\[2cm]
+
+Trabajo Final de Pregrado presentado por\\[0.7cm]
+
+\textbf{{\LARGE Johan Sammir Méndez Holguín}}\\[1cm]
+
+al\\[4mm]
+
+{\Large Departamento de Física}\\[1.5cm]
+
+como requisito parcial\\
+para obtener el grado de\\[1 cm]
+
+\textbf{{\Large Física}}\\[1.5cm]
+
+dirigido por\\
+Phd. Santiago Vargas Domínguez\\
+Phd. Miller Mendoza Jímenez\\[1cm]
+
+
+
+
+\includegraphics[scale=.10]{escudo}\\
+{\Large Universidad Nacional de Colombia}\\[2mm]
+{\Large Facultad de Ciencias}\\[2mm]
+Bogot\'a D.C., Colombia\\[2mm]
+Junio de 2018
+
+\end{center}
+
+\newpage\null\thispagestyle{empty}\newpage
+
+\newpage
+\pagenumbering{roman}
+\thispagestyle{empty}
+\vspace*{9cm}
+\begin{flushright}
+\textit{Dedicatoria\\ }
+\end{flushright}
+
+\newpage\null\thispagestyle{empty}\newpage
+
+\newpage
+\thispagestyle{empty}
+\vspace*{3.5cm}
+
+{\Large\textbf{Resumen}}\\
+
+kalakalala
+
+ 
+ 
+
+\textit{Palabras clave: }\\
+
+\bigskip
+
+{\Large\textbf{Abstract}}\\
+
+.\\
+
+\textit{Key words: ...}
+
+
+\tableofcontents\thispagestyle{empty}
+\pagestyle{plain}\include{introduccion}
+\mainmatter
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LO]{\leftmark}
+\fancyhead[RO,LE]{\thepage}
+
+
+\include{Electrodinamica}
+\newpage
+\include{Fluidos}
+\newpage
+\include{Boltzmann}
+\newpage
+\include{MHD}
+\newpage
+\include{Observaciones}
+\newpage
+\include{Resultados}
+\newpage
+
+\newpage\null\thispagestyle{empty}\newpage
+%\include{1Definiciones}
+%\newpage\null\thispagestyle{empty}\newpage
+\newpage
+
+
+%\include{CAP3}
+%\newpage
+%\include{CAPFA}
+
+
+
+
+
+
+
+
+
+
+\bibliographystyle{plain}
+\bibliography{references}
+
+
+\end{document}

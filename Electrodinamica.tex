@@ -1,0 +1,199 @@
+\setcounter{page}{1}
+\chapter{Electrodinámica}
+
+
+
+
+
+
+En la presente sección se revisa la teoría de la  electrodinámica clásica. EL estudio de la variación temporal de los campos magnéticos y eléctricos muestra una fuerte relación entre ellos, en donde el cambio de cambios eléctricos produce campos magnéticos y viceversa.\cite{Chaichian}\\
+
+
+
+\section{Ley de Gauss}
+
+Esta es la primera de las ecuaciones básicas para la descripción del campo eléctrico, en donde se hace la deducción para los campo eléctricos generados por cargas en reposo. El campo eléctrico dado por una distribución de cargas está dada por\cite{Jackson}
+
+\begin{eqnarray}
+    \vec{E}(\vec{r}) =\frac{1}{4\pi\epsilon_{0}} \int_{\bf{V}}\rho(\vec{\bf{r}}
+)\frac{\vec{r}-\vec{\bf{r}}}{|\vec{r}-\vec{\bf{r}}|^{3}}d\bf{V}
+\end{eqnarray}
+
+Se calcula $\nabla \cdot \vec{E}$, es decir
+
+\begin{eqnarray}
+\label{integralGauss}
+    \nabla \cdot \vec{E} = \nabla\cdot\left[\int_{V}\rho(\vec{\bf{r}}
+)\frac{\vec{r}-\vec{\bf{r}}}{|\vec{r}-\vec{\bf{r}}|^{3}}d\bf{V}\right] = \frac{1}{4\pi\epsilon_{0}}\int_{\bf{V}}\rho(\vec{\bf{r}})\nabla\cdot\left[\frac{\vec{r}-\vec{\bf{r}}}{|\vec{r}-\vec{\bf{r}}|^{3}}\right]d\bf{V}
+\end{eqnarray}
+
+Consideramos $\vec{R} = \vec{r}-\vec{\bf{r}}$ , entonces se necesita calcular 
+
+\begin{eqnarray}
+    \nabla\cdot\left[\frac{\vec{R}}{R^{3}}\right] &=& \frac{1}{R^{3}}\nabla\cdot\vec{R}+\vec{R}\cdot\nabla\left[\frac{1}{R^{3}}\right]\\
+    &=&\frac{3}{R^{3}} - \frac{3}{R^{3}} 
+\end{eqnarray}
+
+Cuando $\vec{R} = 0$ se tiene que el sistema de referencia está ubicado en el mismo lugar que las cargas generadoras del campo eléctrico. Para resolver \eqref{integralGauss} se considera una pequeña esfera de radio R alrededor del punto $\vec{r}=\vec{\bf{r}}$, usando el teorema de la divergencia \cite{Arfken}
+
+\begin{eqnarray}
+    \int_{\bf{V}}\nabla\cdot\left[\frac{\vec{R}}{R^{3}}\right]dV &=& \oint_{S}\left[\frac{\vec{R}}{R^{3}}\right]\cdot\hat{n}dA = \oint_{S}\left[\frac{\vec{R}}{R^{3}}\right]\cdot\left[\frac{\vec{R}}{R}\right]dA = \oint_{S}\frac{R^{4}}{R^{4}}dA \\
+    &=&\frac{1}{R^{2}}\oint_{S}dA = \frac{1}{R^{2}}(4\pi R^{2}) = 4\pi
+\end{eqnarray}
+
+El anterior resultado no depende de R el resultado es válido para $\vec{R} = 0$, que es el punto de interés. Como el resultad se anula para todo punto $\vec{R} \neq 0$. La única contribución se da cuando $\vec{R} = 0$. De esta manera se utilizan las propiedades de la delta de Dirac\cite{Arfken} para escribir 
+
+\begin{eqnarray}
+    \int_{\bf{V}}\nabla\cdot\left[\frac{\vec{R}}{R^{3}}\right]dV = \int_{\bf{V}}4\pi \delta(\vec{R})dV
+\end{eqnarray}
+
+Reemplzando en \eqref{integralGauss}, se llega a lo siguiente
+
+\begin{eqnarray}
+    \label{Leygauss}
+    \nabla \cdot \vec{E} = \frac{1}{\epsilon_{0}}\int_{\bf{V}}\rho(\vec{\bf{r}})\delta(\vec{r}-\vec{\bf{r}})d\bf{V} \longrightarrow \boxed{ \nabla \cdot \vec{E} = \frac{\rho}{\epsilon_{0}}}
+\end{eqnarray}
+
+\section{Ecuación de Gauss para el magnetismo }
+
+
+Por analogía con el campo eléctrico se puede plantear la ley de Gauss para el Magnetismo, que tendría la forma
+
+\begin{eqnarray}
+    \oint \vec{B}\cdot\hat{n}\quad dA = \mu_{0}Q_{mag}
+\end{eqnarray}
+
+Donde se plantea la existencia de la carga magnética. Hasta la fecha no se ha encontrado la existencia de los monopolos magnéticos, es decir, cargas magnéticas aisladas, lo único que se tiene comprobado son los dipolos magnéticos, así que la integral propuesta anteriormente se reduce de la siguiente manera
+
+\begin{eqnarray}
+    \oint \vec{B}\cdot\hat{n}\quad dA = 0
+\end{eqnarray}
+
+Esto se cumple para cualquier campo magnético. Para poder demostrar esto se considera la ley de Biot Savart \cite{kleber}
+
+\begin{eqnarray}
+    \nabla\cdot\vec{B} = \nabla\cdot\left[\frac{\mu_{o}}{4\pi}\int_{V}\frac{\vec{J}(\vec{\bf{r}})\times(\vec{r}-\vec{\bf{r}})}{|\vec{r}-\vec{\bf{r}}|^{3}}d\bf{V}\right] = \frac{\mu_{o}}{4\pi}\int_{V}\nabla\cdot\left[\frac{\vec{J}(\vec{\bf{r}})\times(\vec{r}-\vec{\bf{r}})}{|\vec{r}-\vec{\bf{r}}|^{3}}\right]d\bf{V}
+\end{eqnarray}
+
+Utilizando una identidad vectorial vectorial\footnote{$\nabla\cdot(\vec{A}\times \vec{B}) = (\nabla \times \vec{A})\cdot \vec{B} - \vec{A}\cdot(\nabla \times \vec{B})$} se puede reescribir la divergencia de las corrientes generadoras de campo magnético en el campo magnético
+
+\begin{eqnarray}
+    \nabla\cdot\left[\frac{\vec{J}(\vec{\bf{r}})\times(\vec{r}-\vec{\bf{r}})}{|\vec{r}-\vec{\bf{r}}|^{3}}\right] = [\nabla \times \vec{J}(\vec{\bf{r}})]\cdot \frac{\vec{r}-\vec{\bf{r}}}{|\vec{r}-\vec{\bf{r}}|^{3}}- \vec{J}(\vec{\bf{r}})\cdot\left[\nabla\times\frac{\vec{r}-\vec{\bf{r}}}{|\vec{r}-\vec{\bf{r}}|^{3}}\right]
+\end{eqnarray}
+
+Dado que $\vec{J}(\vec{\bf{r}})$ no depende de $\vec{r}$ y el operador actúa sobre las coordenadas descritas por $\vec{r}$, se anula el primer término , por tanto se tiene que 
+
+\begin{eqnarray}
+     \nabla\cdot\left[\frac{\vec{J}(\vec{\bf{r}})\times(\vec{r}-\vec{\bf{r}})}{|\vec{r}-\vec{\bf{r}}|^{3}}\right] = \vec{J}(\vec{\bf{r}})\cdot\left(\nabla\times\nabla\left[\frac{1}{|\vec{r}-\vec{\bf{r}}|}\right]\right)
+\end{eqnarray}
+
+Como el rotacional de el gradiente de una función escalar siempre es cero \cite{Arfken}, se llega a 
+
+\begin{eqnarray}
+    \nabla\cdot\left[\frac{\vec{J}(\vec{\bf{r}})\times(\vec{r}-\vec{\bf{r}})}{|\vec{r}-\vec{\bf{r}}|^{3}}\right] = 0
+\end{eqnarray}
+
+Finalmente se obtiene la primera ecuación para el campo magnético 
+
+\begin{eqnarray}
+    \boxed{\nabla \cdot \vec{B} = 0}
+\end{eqnarray}
+
+\noindent Los principios fundamentales de la teoría electromagnética se consigan en un sistema de ecuaciones diferenciales parciales lineales, conocidas como \emph{Ecuaciones de Maxwell}. Dos de tales ecuaciones muestran la variacion temporal de los campos eléctricos $\vec{E}$ y magnéticos $\vec{B}$. para empezar se consideran estas dos primeras ecuaciones.\\
+
+
+
+\section{Ecuación de Ampère Maxwell}
+
+Se considera la ecuación de Ampère \cite{Jackson} , aplicando el operador divergencia se obtiene una relación para poder obtener un régimen estacionario
+
+
+
+\begin{eqnarray}
+    \label{Ampère}
+    \nabla \times \vec{H} = \vec{J} \qquad  \longrightarrow  \qquad 
+    \nabla \cdot \vec{J} = 0 
+\end{eqnarray}
+
+Tal condición junto con la ecuación de continuidad exige al sistema la conservación de la densidad de carga, y esto evidencia una posible contradición de la formulación
+
+\begin{eqnarray}
+    \nabla \cdot \vec{J} = -\frac{\partial \rho}{\partial t}
+\end{eqnarray}
+
+Maxwell resuelve tal inconsistencia introduciendo el concepto de corriente de desplazamiento. La densidad de corriente $\vec{J}$ en la ecuación de continuidad aparece debido al desplazamiento de cargas y puede contener corrientes por conducción o conveccion. Pero en el caso de Ampère la corriente está sujeta a la condición dad por  \eqref{Ampère} , falta considerar un tipo de corriente para que sea consistente el modelo, esto es
+
+\begin{eqnarray}
+    \vec{J} = \vec{J}_{cond} + \vec{J}_{Des}
+\end{eqnarray}
+
+Por lo tanto la ecuación de Ampère toma la forma
+
+\begin{eqnarray}
+    \nabla \times \vec{H} = \vec{J}_{cond} + \vec{J}_{Des}
+\end{eqnarray}
+
+Tomando la divergencia se puede obtener la siguiente condición 
+
+\begin{eqnarray}
+    \nabla \cdot \vec{J}_{Des} = -\nabla \cdot \vec{J}_{cond} = \frac{\partial \rho}{\partial t}
+\end{eqnarray}
+
+Considerando el teorema de Gauss \cite{Arfken} se puede llegar a las siguientes expresiones
+
+\begin{eqnarray}
+    \nabla\cdot\vec{J}_{Des} = \frac{\partial }{\partial \nabla \cdot \vec{D}} = \nabla\cdot\left(\frac{\partial\vec{D}}{\partial t}\right) \qquad \longrightarrow \qquad \vec{J}_{Des} = \frac{\partial \vec{D}}{\partial t}
+\end{eqnarray}
+
+
+Llegando a la forma reportada en la literatura como la ecuación de Ampère Maxwell. Considerando también el vacío se tiene $H = B/\mu_{o}$, $D = \epsilon_{o}\vec{E}$ 
+
+\begin{eqnarray}
+\label{Ampere}
+    \boxed{\nabla \times \vec{H} = \vec{J} + \frac{\partial D}{\partial t}} \qquad \qquad \boxed{\nabla \times \vec{B} = \mu_{o}\vec{J} + \frac{1}{c^{2}}\frac{\partial \vec{E}}{\partial t}}
+\end{eqnarray}
+
+donde $c =1/\sqrt{\epsilon_{o}\mu_{o}}$, la corriente de desplazamiento también se da en el vacío dado que la variación temporal del campo eléctrico produce un campo magnético variable 
+
+\section{Ecuación de Faraday Maxwell}
+
+La fuerza electromotriz inducida alrededor del circuito es proporcional a la tasa de cambio del flujo magnético que atraviesa la superficie encerrada por el circuito.  \cite{Lacava}
+
+\begin{eqnarray}
+\label{Faraday}
+    f = \oint_{C} \vec{E}\cdot d\vec{l} = -\frac{d }{dt}\int_{S}\vec{B}\cdot d\vec{S} = -\frac{ d\Phi}{dt}
+\end{eqnarray}
+
+Donde $f$ es la fuerza electromotriz ($fem$), S es una superficie rodeada de un contorno que cumple el teorema de Jordan \cite{Rudin} independientes del tiempo, $\Phi$ es el flujo magnético a través de la superficie. El signo en la ecuación \eqref{Faraday} está dado por la ley de Lenz \cite{Purcell}, la cual asegura que  la corriente inducida está en una dirección tal que se opone al cambio de flujo a través del circuito .\\
+
+Se supone que los sucesos físicos deben ser invariantes en el sentido marcos de referencia relativos, esto sugiere que dos observadores con diferentes velocidades relativas pero constantes constantes $v$ entre ellos  deben percibir fenómenos iguales. En particular en la ley de Faraday se consigue considerando un circuito que se mueve a cierta velocidad $v$, por tanto se observa que 
+
+\begin{eqnarray}
+\label{Faraday2}
+    \oint_{C} \vec{E'}\cdot d\vec{l} = -\frac{d }{dt}\int_{S}\vec{B}\cdot d\vec{S}
+\end{eqnarray}
+
+Como la fuerza electromotriz es igual a la derivada total del flujo se debe considerar que el circuito se puede mover de manera arbitraria. La translación del circuito cambia el lugar de la frontera de la superficie y el flujo cambia en relación con la velocidad $v$ ,por lo tanto se considera la derivada convectiva
+
+\begin{eqnarray}
+    \frac{d }{dt}\int_{S}\vec{B}\cdot d\vec{S} &=& \left(\frac{\partial}{\partial t} + \vec{v}\cdot\nabla\right)\int_{S}\vec{B}\cdot d\vec{S}\nonumber\\
+    &=& \int_{S}\left(\frac{\partial \vec{B}}{\partial t} + (\vec{v}\cdot\nabla)\vec{B}\right)d\vec{S}\nonumber \\
+    &=&\int_{S}\left(\frac{\partial \vec{B}}{\partial t} + \nabla \times (\vec{B} \times \vec{v}) +\vec{v}(\cancel{\nabla \cdot \vec{B}})\right)d\vec{S}\nonumber \\
+    &=&\int_{S}\left(\frac{\partial \vec{B}}{\partial t} + \oint_{C}(\vec{B\times \vec{v}})\cdot d\vec{l}\right)
+\end{eqnarray}
+
+Entonces se obtiene la ecuación de Faraday \eqref{Faraday2} cuando se considera el circuito C en movimiento 
+
+\begin{eqnarray}
+    \oint_{C} \left(\vec{E'} + (\vec{v}\times \vec{B})\right)\cdot d\vec{l} = -\int_{S}\frac{\partial \vec{B}}{\partial t}\cdot d\vec{S}
+\end{eqnarray}
+
+La consideración de la invariancia supone que $\vec{E'} = \vec{E} -( \vec{v}\times \vec{B})$, donde $\vec{E'}$ es el campo eléctrico en reposo, como la consideración es clásica, solo es válida cuando $v << c$. Utilizando el teorema de Stokes \cite{Arfken} en \eqref{Faraday2},se muestra que 
+
+\begin{eqnarray}
+\label{FM}
+    \int_{S}\left(\nabla \times \vec{E}+\frac{\partial\vec{B}}{\partial t}\right)\cdot d\vec{S} =0 \qquad \longrightarrow \qquad \boxed{\nabla \times \vec{E} + \frac{\partial \vec{B}}{\partial t} = 0}
+\end{eqnarray}
+
+Esta es la ecuación de Faraday Maxwell. Expresa el hecho de que la variación temporal del campo magnético trae como consecuencia un cambio en el espacio del campo eléctrico. En el vacío o en medios materiales
+

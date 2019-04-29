@@ -1,0 +1,170 @@
+\chapter{Magnetohidrodinámica (MHD)}
+
+
+\noindent El objetivo concreto de este capítulo es dar un entendimiento físico del modelo ideal magnetohidrodinámico (MHD), esto incluye una descripción básica del modelo, la deducción desde un punto de la teoría cinética y la discusión y los límites de la validez de tal teoría.
+
+\medskip
+
+\noindent El modelo ideal MHD da una descripción de longitud de onda larga y bajas frecuencias. En este orden de ideas y pretendiendo abarcar la física desde una perspectiva más formal, en la deducción del caso ideal se consideran principios básicos. Utilizando las ecuaciones de Maxwell y la ecuación de Boltzmann
+
+
+
+\begin{eqnarray}
+\nabla \cdot \vec{E} &=& \frac{\rho}{\epsilon_{0}}\nonumber\\
+\nabla \cdot \vec{B} &=& 0\nonumber\\
+\nabla\times\vec{B} &=& \mu_{o}\vec{J}+\frac{1}{c^{2}}\frac{\partial \vec{E}}{\partial t}\nonumber\\
+\nabla\times\vec{E} &=& \frac{\partial \vec{B}}{\partial t}\nonumber\\
+\label{BMHD}
+  \left(\frac{\partial f}{\partial t}\right)_{c} &=&\frac{\partial f}{\partial t} + v_{i}\frac{\partial f}{\partial x_{i}} + \frac{q(E_{i}+\varepsilon_{ijk}v_{j}B_{k})}{m}\frac{\partial f}{\partial v_{i}}
+\end{eqnarray}
+
+\noindent en particular para describir los fenomenos MHD se incluye el termino de fuerza de Lorentz, además las definiciones de densidad de corriente y densidad de carga 
+
+\begin{eqnarray}
+\vec{J} &=& q\int \vec{\xi}f(\vec{x},\vec{\xi},t)d\vec{\xi}\\
+\sigma &=& q\int f(\vec{x},\vec{\xi},t)d\vec{\xi} d\vec{\xi}
+\end{eqnarray}
+
+\noindent donde $f$ es la función de distribución definida en la sección anterior. En la descripción de Boltzmann se consideran dos tipos de fuerzas que actúan sobre las partículas. La primera de ellas es de largo alcanze y está dada por las fuerzas de Lorentz $q(\vec{E}+\vec{v}\times\vec{B})$ en la cual $\vec{E}$ y $\vec{B}$ son de buen comportamiento en el sentido del calculo diferencial y obtenidos a partir de el vector densidad de corriente y la densidad de carga. La segunda fuerza está asociadada con el operador de colisión\cite{BGK} impuesto en la ecuación de Boltzmann, el cual es una interacción de corto alcance. Es bueno recordar que nuestro parámetro de comparación será el camino libre medio\cite{lecture5}. 
+
+\medskip
+
+\noindent En MHD asumimos que el fluido no es relativista y estamos interesados en variaciones de tiempo muy lentas. Podemos ignorar la corriente de desplazamiento al tener en cuenta estas consideraciones. Por lo ranto la ley de Ohm\cite{Jackson}:
+
+\begin{eqnarray}
+\label{OHMr}
+\vec{E}' = \eta\vec{J}
+\end{eqnarray}
+
+\noindent donde $\vec{E}'$ es un campo eléctrico visto desde un sistema de referencia con velocidad relativa $\vec{v}$, por lo tanto 
+
+\begin{eqnarray}
+\vec{E}' = \frac{\vec{E}+\vec{v}\times\vec{B}}{\sqrt{1-v^{2}/c^{2}}}
+\end{eqnarray}
+
+\noindent como el problema no tiene en cuenta efectos de la relatividad especial consideramos 
+
+\begin{eqnarray}
+\vec{E}' = \vec{E}+\vec{v}\times\vec{B} + \mathcal{O}\left(\frac{v^{2}}{c^{2}}\right)
+\end{eqnarray}
+
+\noindent entonces teniendo en cuenta \eqref{OHMr} y \eqref{Ampère} se llega :
+
+\begin{eqnarray}
+\vec{E} = -\vec{v}\times\vec{B}+\eta\vec{J} \qquad \qquad \vec{J} = \frac{1}{\mu_{o}}(\nabla \times \vec{B})
+\end{eqnarray}
+
+\noindent se puede utilizar la ecuación de Faraday-Maxwell \eqref{FM}, obteniendo:
+
+\begin{eqnarray}
+\label{Btemp}
+\frac{\partial \vec{B}}{\partial t} &=& -\nabla \times \vec{E} = \nabla \times(-\vec{v}\times\vec{B}+\eta\vec{J)}\\
+&=& -\nabla \times (\eta\vec{J})+\nabla\times(\vec{v}\times\vec{B})\\
+&=&-\nabla\times\left(\frac{\eta}{\mu_{o}}(\nabla\times\vec{B})\right) + \nabla\times(\vec{v}\times\vec{B})\\
+&=&\frac{\eta}{\mu_{o}}\nabla^{2}\vec{B} + \nabla\times(\vec{v}\times\vec{B})
+\end{eqnarray}
+
+\noindent con este procedimiento se elimina la dependencia explícita en las ecuaciones del campo eléctrico, la evolución temporal del campo magnético depende de variaciones espaciales de de $\vec{B}$ y del campo de velocidades del sistema. Para hacer un análisis físico más simple se escribe \eqref{Btemp} en forma conservativa, para tal fin consideramos el segundo termino de la anterior ecuación
+
+\begin{eqnarray}
+\nabla\times(\vec{v}\times\vec{B}) &=& \varepsilon_{ijk}\frac{\partial}{\partial x_{j}}(\varepsilon_{kml}v_{m}B_{l})\\
+&=&\varepsilon_{ijk}\varepsilon_{kml}\frac{\partial}{\partial x_{j}}(v_{m}B_{l})\\
+&=&-\varepsilon_{ijk}\varepsilon_{lmk}\frac{\partial}{\partial x_{j}}(v_{m}B_{l})\\
+&=&(\delta_{il}\delta_{jm}-\delta_{im}\delta_{jl})\frac{\partial}{\partial x_{j}}(v_{m}B_{l})\\
+&=&\frac{\partial}{\partial x_{j}}(v_{i}B_{j})-\frac{\partial}{\partial x_{j}}(v_{j}B_{i})\\
+&=&\frac{\partial}{\partial x_{j}}(v_{i}B_{j}-v_{j}B_{i})
+\end{eqnarray}
+
+\noindent por tanto para el campo magnético  la ecuación de conservación es la siguiente 
+
+\begin{eqnarray}
+\boxed{
+\frac{\partial B_{i}}{\partial t} + \frac{\partial}{\partial x_{j}}(v_{i}B_{j}-v_{j}B_{i}) = \frac{\eta}{\mu_{o}}\frac{\partial^{2}B_{i}}{\partial x_{j}^{2}}
+}
+\end{eqnarray}
+
+%\noindent esta ecuación está acoplada con la ecuación de Euler para dar la evolución de $v$ además actuando como la fuerza externa que da el comportamiento particular de los plasmas
+
+
+\noindent Ahora se encuentra la ecuación de momento del fluido magnetizado, para esto se estudia el cambio del momento en el tiempo para tal fin se considera la ecuación de continuidad \eqref{continuidad} y la ecuación de Navier Stokes \eqref{NS}. Se escriben de manera conveniente
+
+\begin{eqnarray}
+\label{contindicial}
+\frac{\partial \rho}{\partial t}&=&-\frac{\partial}{\partial x_{k}}(\rho u_{k})\\
+\label{NSindicial}
+\frac{\partial u_{i}}{\partial t} &=& -u_{k}\frac{\partial u_{i}}{\partial x_{k}} - \frac{1}{\rho}\frac{\partial p}{\partial x_{i}} + \frac{1}{\rho}\frac{\partial \sigma_{ik}}{\partial x_{k}}
+\end{eqnarray}
+
+
+
+\noindent se adiciona al problema la fuerza de lorentz, de esta manera se incluye la interacción electromagnética. En primer lugar vemos que la variación de momento del fluido está dado por la siguiente expresión 
+
+\begin{eqnarray}
+\frac{\partial}{\partial t}(\rho u_{i}) = u_{i}\frac{\partial 
+\rho}{\partial t} + \rho \frac{\partial u_{i}}{\partial t} + (\vec{F}_{EM})_{i} 
+\end{eqnarray}
+
+\noindent teniendo en cuenta \eqref{contindicial} y \eqref{NSindicial}
+
+\begin{eqnarray}
+\frac{\partial}{\partial t}(\rho u_{i}) = u_{i}\left[-\frac{\partial}{\partial x_{k}}(\rho u_{k})\right] + \rho\left[-u_{k}\frac{\partial u_{i}}{\partial x_{k}} - \frac{1}{\rho}\frac{\partial p}{\partial x_{i}} + \frac{1}{\rho}\frac{\partial \sigma_{ik}}{\partial x_{k}}\right] + (\vec{j}\times\vec{B})_{i}\nonumber
+\end{eqnarray}
+
+\noindent ahora podemos reescribir un poco la ecuación ayudándonos de una regla de la cadena
+
+\begin{eqnarray}
+\frac{\partial}{\partial x_{k}}(\rho u_{i}u_{k}) = u_{k}\frac{\partial(\rho u_{i})}{\partial x_{k}}+u_{i}\frac{\partial(\rho u_{k})}{\partial x_{k}}\nonumber
+\end{eqnarray}
+
+\noindent obteniendo
+
+\begin{eqnarray}
+\frac{\partial}{\partial t}(\rho u_{i}) = -\frac{\partial}{\partial x_{k}}(\rho u_{i}u_{k})-\frac{\partial p}{\partial x_{k}}\delta_{ik} + \frac{\partial \sigma_{ik}}{\partial x_{k}}+ \left(\frac{1}{\mu_{o}}(\nabla\times\vec{B})\times\vec{B}\right)_{i}\nonumber\\
+\label{momentos1}
+\frac{\partial}{\partial t}(\rho u_{i})+\frac{\partial}{\partial x_{k}}\left[\rho u_{i}u_{k}+p\delta_{ik}\right] = \frac{\partial \sigma_{ik}}{\partial x_{k}}+\left(\frac{1}{\mu_{o}}(\nabla\times\vec{B})\times\vec{B}\right)_{i}
+\end{eqnarray}
+
+\noindent Considerando el segundo termino del lado derecho
+
+\begin{eqnarray}
+\left((\nabla\times\vec{B})\times\vec{B}\right)_{i}&=&\varepsilon_{ijk}\left(\varepsilon_{jmn}\frac{\partial B_{n}}{\partial x_{m}}\right)B_{k}\nonumber\\
+&=&-\varepsilon_{ikj}\varepsilon_{jmn}\frac{\partial B_{n}}{\partial x_{m}}B_{k}\nonumber\\
+&=&(\delta_{im}\delta_{kn}-\delta_{in}\delta_{km})\frac{\partial B_{n}}{\partial x_{m}}B_{k}\nonumber\\
+&=&\delta_{im}\delta_{kn}\frac{\partial B_{n}}{\partial x_{m}}B_{k}-\delta_{in}\delta_{km}\frac{\partial B_{n}}{\partial x_{m}}B_{k}\nonumber\\
+&=&B_{k}\frac{\partial B_{k}}{\partial x_{i}}-B_{k}\frac{\partial B_{i}}{\partial x_{k}}
+\end{eqnarray}
+
+\noindent se toman dos expresiones auxiliares para reescribir en forma de divergencia
+
+
+    \begin{eqnarray}
+    \frac{\partial}{\partial x_{i}}(B_{k}B_{k}) = 2B_{k}\frac{\partial B_{k}}{\partial x_{i}}\quad\longrightarrow\quad \boxed{B_{k}\frac{\partial B_{k}}{\partial x_{i}} = \frac{1}{2}\frac{\partial}{\partial x_{i}}(B_{k}B_{k})}
+    \end{eqnarray}
+    \begin{eqnarray}
+    \frac{\partial}{\partial x_{k}}(B_{i}B_{k}) = B_{k}\frac{\partial B_{i}}{\partial x_{k}} + B_{i}\frac{\partial B_{k}}{\partial x_{k}} \quad\longrightarrow\quad \boxed{B_{k}\frac{\partial B_{i}}{\partial x_{k}}=\frac{\partial}{\partial x_{k}}(B_{i}B_{k})-B_{i}\frac{\partial B_{k}}{\partial x_{k}}}
+    \end{eqnarray}
+
+\noindent la fuerza de Lorentz se reescribe de la siguiente manera
+
+\begin{eqnarray}
+\left((\nabla\times\vec{B})\times\vec{B}\right)_{i} &=& \frac{\partial}{\partial x_{k}}(B_{i}B_{k})-B_{i}\frac{\partial B_{k}}{\partial x_{k}}-\frac{1}{2}\frac{\partial}{\partial x_{i}}(B_{k}B_{k})\nonumber 
+\end{eqnarray}
+
+\noindent como $\nabla\cdot\vec{B} = 0$ la ecuación se reduce a:
+
+\begin{eqnarray}
+\label{LorentzIndicial}
+\left((\nabla\times\vec{B})\times\vec{B}\right)_{i} &=& \frac{\partial}{\partial x_{k}}(B_{i}B_{k})-\frac{1}{2}\frac{\partial}{\partial x_{i}}(B_{k}B_{k}) 
+\end{eqnarray}
+
+Se reemplaza \eqref{LorentzIndicial} en \eqref{momentos1} para obtener
+
+\begin{eqnarray}
+\boxed{\frac{\partial(\rho u_{i})}{\partial t}+\frac{\partial}{\partial x_{k}}\left[\rho u_{i}u_{k}+\left(p+\frac{1}{2\mu_{o}}B^{2}\right)\delta_{ik}-\frac{1}{\mu_{o}}B_{i}B_{k}\right] = \frac{\partial \sigma_{ik}}{\partial x_{k}}}
+\end{eqnarray}
+
+Donde $B^{2}$ hace referencia al término de presión magnética y el tensor $\vec{B}\vec{B}$ es la tensión magnética
+
+\section{Ecuaciones del sistema}
+\section{Consideraciones}
+\section{Física Solar }
