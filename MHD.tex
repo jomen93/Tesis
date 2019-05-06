@@ -1,11 +1,10 @@
 \chapter{Magnetohidrodinámica (MHD)}
 
 
-\noindent El objetivo concreto de este capítulo es dar un entendimiento físico del modelo ideal magnetohidrodinámico (MHD), esto incluye una descripción básica del modelo, la deducción desde un punto de la teoría cinética y la discusión y los límites de la validez de tal teoría.
+\noindent El objetivo concreto de este capítulo es dar un entendimiento físico del modelo ideal magnetohidrodinámico (MHD), esto incluye una descripción básica del modelo.
+\begin{comment}
 
-\medskip
-
-\noindent El modelo ideal MHD da una descripción de longitud de onda larga y bajas frecuencias. En este orden de ideas y pretendiendo abarcar la física desde una perspectiva más formal, en la deducción del caso ideal se consideran principios básicos. Utilizando las ecuaciones de Maxwell y la ecuación de Boltzmann
+\noindent El modelo ideal MHD se sitúa bajo la consideración de longitud de onda larga y bajas frecuencias. En este orden de ideas y pretendiendo abarcar la física desde una perspectiva más formal, en la deducción del caso ideal se consideran principios básicos. Utilizando las ecuaciones de Maxwell\eqref{Leygauss},\eqref{divceroB},\eqref{Ampere},\eqref{FM} y la ecuación de Boltzmann\eqref{Boltzmann},
 
 
 
@@ -29,20 +28,21 @@
 
 \medskip
 
-\noindent En MHD asumimos que el fluido no es relativista y estamos interesados en variaciones de tiempo muy lentas. Podemos ignorar la corriente de desplazamiento al tener en cuenta estas consideraciones. Por lo ranto la ley de Ohm\cite{Jackson}:
+\end{comment}
+Asumimos que el fluido no es relativista y el interés se centra en variaciones de tiempo muy lentas, ado esto podemos considerar ignorar la corriente de desplazamiento al tener en cuenta estas consideraciones. Por lo ranto la ley de Ohm\cite{Jackson}:
 
 \begin{eqnarray}
 \label{OHMr}
 \vec{E}' = \eta\vec{J}
 \end{eqnarray}
 
-\noindent donde $\vec{E}'$ es un campo eléctrico visto desde un sistema de referencia con velocidad relativa $\vec{v}$, por lo tanto 
+\noindent donde $\vec{E}'$ es un campo eléctrico visto desde un sistema de referencia con velocidad relativa $\vec{v}$, por lo tanto el campo eléctrico en tal sistema está dado por 
 
 \begin{eqnarray}
 \vec{E}' = \frac{\vec{E}+\vec{v}\times\vec{B}}{\sqrt{1-v^{2}/c^{2}}}
 \end{eqnarray}
 
-\noindent como el problema no tiene en cuenta efectos de la relatividad especial consideramos 
+\noindent como el problema no tiene en cuenta efectos de la relatividad especial se considera una expansión de Taylor y se restringe a primer orden la serie
 
 \begin{eqnarray}
 \vec{E}' = \vec{E}+\vec{v}\times\vec{B} + \mathcal{O}\left(\frac{v^{2}}{c^{2}}\right)
@@ -64,7 +64,7 @@
 &=&\frac{\eta}{\mu_{o}}\nabla^{2}\vec{B} + \nabla\times(\vec{v}\times\vec{B})
 \end{eqnarray}
 
-\noindent con este procedimiento se elimina la dependencia explícita en las ecuaciones del campo eléctrico, la evolución temporal del campo magnético depende de variaciones espaciales de de $\vec{B}$ y del campo de velocidades del sistema. Para hacer un análisis físico más simple se escribe \eqref{Btemp} en forma conservativa, para tal fin consideramos el segundo termino de la anterior ecuación
+\noindent con este procedimiento se elimina la dependencia explícita en las ecuaciones del campo eléctrico, la evolución temporal del campo magnético depende de variaciones espaciales de de $\vec{B}$ y del campo de velocidades del sistema. Para hacer un análisis físico más simple se escribe \eqref{Btemp} en forma conservativa, para tal fin se considera el segundo termino de la anterior ecuación
 
 \begin{eqnarray}
 \nabla\times(\vec{v}\times\vec{B}) &=& \varepsilon_{ijk}\frac{\partial}{\partial x_{j}}(\varepsilon_{kml}v_{m}B_{l})\\
@@ -80,13 +80,13 @@
 \begin{eqnarray}
 \boxed{
 \frac{\partial B_{i}}{\partial t} + \frac{\partial}{\partial x_{j}}(v_{i}B_{j}-v_{j}B_{i}) = \frac{\eta}{\mu_{o}}\frac{\partial^{2}B_{i}}{\partial x_{j}^{2}}
-}
+}.
 \end{eqnarray}
 
 %\noindent esta ecuación está acoplada con la ecuación de Euler para dar la evolución de $v$ además actuando como la fuerza externa que da el comportamiento particular de los plasmas
 
 
-\noindent Ahora se encuentra la ecuación de momento del fluido magnetizado, para esto se estudia el cambio del momento en el tiempo para tal fin se considera la ecuación de continuidad \eqref{continuidad} y la ecuación de Navier Stokes \eqref{NS}. Se escriben de manera conveniente
+\noindent Ahora se encuentra la ecuación de momento del fluido magnetizado, para esto se estudia el cambio del momento en el tiempo para tal fin se considera la ecuación de continuidad \eqref{continuidad} y la ecuación de Navier Stokes \eqref{NS}. Se escriben de manera conveniente tal y como sigue 
 
 \begin{eqnarray}
 \label{contindicial}
@@ -97,7 +97,7 @@
 
 
 
-\noindent se adiciona al problema la fuerza de lorentz, de esta manera se incluye la interacción electromagnética. En primer lugar vemos que la variación de momento del fluido está dado por la siguiente expresión 
+\noindent se adiciona al problema la fuerza de lorentz, de esta manera se incluye la interacción electromagnética. En primer lugar vemos que la variación de momento del fluido está dada por la siguiente expresión 
 
 \begin{eqnarray}
 \frac{\partial}{\partial t}(\rho u_{i}) = u_{i}\frac{\partial 
@@ -163,8 +163,21 @@ Se reemplaza \eqref{LorentzIndicial} en \eqref{momentos1} para obtener
 \boxed{\frac{\partial(\rho u_{i})}{\partial t}+\frac{\partial}{\partial x_{k}}\left[\rho u_{i}u_{k}+\left(p+\frac{1}{2\mu_{o}}B^{2}\right)\delta_{ik}-\frac{1}{\mu_{o}}B_{i}B_{k}\right] = \frac{\partial \sigma_{ik}}{\partial x_{k}}}
 \end{eqnarray}
 
-Donde $B^{2}$ hace referencia al término de presión magnética y el tensor $\vec{B}\vec{B}$ es la tensión magnética
+Donde $B^{2}$ hace referencia al término de presión magnética y el tensor $\vec{B}\vec{B}$ es la tensión magnética. 
 
 \section{Ecuaciones del sistema}
-\section{Consideraciones}
+
+Las ecuaciones fundamentales en MHD empleadas se resumen de la siguiente manera
+
+\begin{eqnarray}
+\frac{\partial \rho}{\partial t} + \nabla\cdot(\rho\vec{v}) &=& 0\nonumber\\
+\frac{\partial B_{i}}{\partial t} + \frac{\partial}{\partial x_{j}}(v_{i}B_{j}-v_{j}B_{i}) &=& \frac{\eta}{\mu_{o}}\frac{\partial^{2}B_{i}}{\partial x_{j}^{2}}\\
+\frac{\partial(\rho u_{i})}{\partial t}+\frac{\partial}{\partial x_{k}}\left[\rho u_{i}u_{k}+\left(p+\frac{1}{2\mu_{o}}B^{2}\right)\delta_{ik}-\frac{1}{\mu_{o}}B_{i}B_{k}\right] &=& \frac{\partial \sigma_{ik}}{\partial x_{k}}\nonumber
+\end{eqnarray}
+
+
+
+
+\section{Parámetros adimensionales}
+En términos de una velocidad típica del plasma $v_{o}$ y una longitud de escala $l_{o}$, la magnitud del término de convección se define el \emph{Número magnético de Reynolds}
 \section{Física Solar }
