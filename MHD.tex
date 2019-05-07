@@ -160,6 +160,7 @@ Asumimos que el fluido no es relativista y el interés se centra en variaciones 
 Se reemplaza \eqref{LorentzIndicial} en \eqref{momentos1} para obtener
 
 \begin{eqnarray}
+\label{LFMS}
 \boxed{\frac{\partial(\rho u_{i})}{\partial t}+\frac{\partial}{\partial x_{k}}\left[\rho u_{i}u_{k}+\left(p+\frac{1}{2\mu_{o}}B^{2}\right)\delta_{ik}-\frac{1}{\mu_{o}}B_{i}B_{k}\right] = \frac{\partial \sigma_{ik}}{\partial x_{k}}}
 \end{eqnarray}
 
@@ -167,7 +168,7 @@ Donde $B^{2}$ hace referencia al término de presión magnética y el tensor $\v
 
 \section{Ecuaciones del sistema}
 
-Las ecuaciones fundamentales en MHD empleadas se resumen de la siguiente manera
+\noindent Las ecuaciones fundamentales en MHD empleadas se resumen de la siguiente manera
 
 \begin{eqnarray}
 \frac{\partial \rho}{\partial t} + \nabla\cdot(\rho\vec{v}) &=& 0\nonumber\\
@@ -179,5 +180,56 @@ Las ecuaciones fundamentales en MHD empleadas se resumen de la siguiente manera
 
 
 \section{Parámetros adimensionales}
-En términos de una velocidad típica del plasma $v_{o}$ y una longitud de escala $l_{o}$, la magnitud del término de convección se define el \emph{Número magnético de Reynolds}
+
+\begin{itemize}
+    \item \textbf{Número de Reynolds Magnético}
+    
+    \noindent En términos de una velocidad típica del plasma $v_{o}$ y una longitud de escala $l_{o}$ típica del sistema y la magnitud del término de convección.
+
+    \begin{eqnarray}
+    R_{m} = \frac{l_{o}v_{o}}{\eta}
+    \end{eqnarray}
+    
+    \noindent Es una medida de la fuerza de acoplamiento entre el flujo y el campo magnético. En el laboratorio usualmente se tiene $R_{m} << 1$ y el acoplamiento s débil, mientras que en la atmósfera solar se tiene $R_{m} >> 1$ y el acoplamiento es fuerte.
+
+    \item
+    
+    \noindent \textbf{Número de Mach}
+    
+    \noindent Este número adimensional mide la velocidad del fluido $v_{o}$ en relación con la velocidad del sonido 
+    
+    \begin{eqnarray}
+        c_{s} = \left(\frac{\gamma p_{o}}{\rho_{o}}\right)^{1/2}
+    \end{eqnarray}
+    este valor depende del medio físico en que se transporta el sonido la utilidad del número de Mach reside en que permite expresar la velocidad de un objeto tomando como referencia la velocidad del sonido, algo interesante desde el momento en que la velocidad del sonido cambia dependiendo de las condiciones del medio.
+    
+    \time 
+    
+    \noindent \textbf{Número de Mach-Alvén }
+    
+    \noindent Considerando la velocidad de Alfvén $v_{A} = B_{o}/(\mu \rho_{o})^{1/2}$, donde $B_{o}$ y $\rho_{o}$ son el campo magnético típico del sistema y la densidad del plasma típica. 
+    
+    \begin{eqnarray}
+    M_{A} = \frac{v_{o}}{v_{a}}
+    \end{eqnarray}
+    
+    Entonces este número relaciona la velocidad del fluido con la velocidad de Alfvén, velocidad a la cual se propagan las ondas magnetohidrodinámicas dentro del sistema estudiado 
+    
+    \item 
+    
+    \textbf{Parámetro $\beta$ del plasma}
+    
+    \noindent Dado que se encuentra que $B^{2}/2\mu_{o}$ es la presión de campo magnético. Considerando que la suma de la presión hidrostática y la presión magnética es constante. En un plasma con un gradiente de densidad la presión de campo magnético debe ser baja donde la densidad de partículas es alta, y viceversa. El decrecimiento de del campo magnético es causado por las corrientes diamagnéticas. El aporte que este efecto tiene dentro de un plasma se cuantifica utilizando la siguiente expresión 
+    
+    \begin{eqnarray}
+    \beta = \frac{2\mu p_{o}}{B_{o}^{2}}=\frac{\text{Presión partículas}}{\text{Presión magnética}}
+    \end{eqnarray}
+    
+    Ahora se puede considerar plasmas con un bajo $\beta$ , en los cuales se sitúa entre $10^{-3} < \beta < 10^{-6}$, en donde el efecto diamagnético entonces es muy pequeño. En cambio si $\beta$ es alto , el valor local de $B$ puede ser muy reducido por el plasma, esto es común encontrarlo en plasmas en el universo
+\end{itemize}
+
+
+
+
+
 \section{Física Solar }

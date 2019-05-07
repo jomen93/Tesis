@@ -1,0 +1,30 @@
+\chapter{Lattice Boltzmann (MHD)}
+
+
+\noindent Los métodos basado en las ecuaciones de Lattice Boltzmann prometen ser una alternativa muy fuerte en la simulación de fluidos computacionales, usando un espacio de velocidades y truncando la ecuación de Boltzmann a partir de la teoría cinética de gases. Tales métodos atacan a sistemas hiperbólicos lineales de coeficiente constantes con términos fuente no lineales. Se tienen entonces pocas aplicaciones en MHD y modelos implementados para estudiar problemas dinámicos del plasma solar. Este trabajo se basa en la propuesta de Dellar \cite{Dellar} que introduce una función de distribución vectorial en lugar de una función de distribución escalar como se hace corrientemente \cite{kruger}.  
+
+\noindent se puede ver que la evolución del campo magnético $\vec{B}$ es determinado por el campo eléctrico asociado a través de la ecuación de inducción
+
+\begin{eqnarray}
+    \frac{\partial \vec{B}}{\partial t} + \nabla \times \vec{E} = 0 \nonumber 
+\end{eqnarray}
+
+\noindent sí se reescribe la anterior ecuación en forma de divergencia se tiene 
+
+\begin{eqnarray}
+    \frac{\partial \vec{B}}{\partial t} + \nabla\cdot\Lambda = 0 \qquad \Lambda_{\alpha\beta}=-\epsilon_{\alpha\beta\gamma}E_{\gamma}
+\end{eqnarray}
+
+donde $\epsilon_{\alpha\beta\gamma}$ es el tensor  de Levi-Civita , y tenemos que $Lambda_{\alpha\beta\gamma}$ es un tensor de segundo orden antisimétrico, esto sugiere que no se puede construir una formulación cinética de la ecuación de inducción magnética análoga a las ecuaciones de Navier-Stokes, en la cual el campo magnético macroscópico sea el primer momento de alguna función de distribución escalar. A partir de este punto se introduce una función de distribución vectorial $\vec{g}(\vec{r},\vec{\xi},t)$ para el campo magnético de la siguiente manera
+
+\begin{eqnarray}
+    \vec{B}(\vec{r},t) = \int \vec{g}(\vec{r},\vec{\xi},t)d\vec{\xi}
+\end{eqnarray}
+
+Se le exige a tal función que satisfaga la ecuación de evolución vectorial BGK, como sigue
+
+\begin{eqnarray}
+    \frac{\partial \vec{g}}{\partial t} = \vec{\xi}\cdot\nabla\vec{g} = -\frac{1}{\tau_{m}}(\vec{g}-\vec{g^{(o)}})
+\end{eqnarray}
+
+que para cada componente cumple la ecuacion BGK escalar. 
