@@ -15,16 +15,53 @@
     \frac{\partial \vec{B}}{\partial t} + \nabla\cdot\Lambda = 0 \qquad \Lambda_{\alpha\beta}=-\epsilon_{\alpha\beta\gamma}E_{\gamma}
 \end{eqnarray}
 
-donde $\epsilon_{\alpha\beta\gamma}$ es el tensor  de Levi-Civita , y tenemos que $Lambda_{\alpha\beta\gamma}$ es un tensor de segundo orden antisimétrico, esto sugiere que no se puede construir una formulación cinética de la ecuación de inducción magnética análoga a las ecuaciones de Navier-Stokes, en la cual el campo magnético macroscópico sea el primer momento de alguna función de distribución escalar. A partir de este punto se introduce una función de distribución vectorial $\vec{g}(\vec{r},\vec{\xi},t)$ para el campo magnético de la siguiente manera
+\noindent donde $\epsilon_{\alpha\beta\gamma}$ es el tensor  de Levi-Civita , y tenemos que $Lambda_{\alpha\beta\gamma}$ es un tensor de segundo orden antisimétrico, esto sugiere que no se puede construir una formulación cinética de la ecuación de inducción magnética análoga a las ecuaciones de Navier-Stokes, en la cual el campo magnético macroscópico sea el primer momento de alguna función de distribución escalar. A partir de este punto se introduce una función de distribución vectorial $\vec{g}(\vec{r},\vec{\zeta},t)$ para el campo magnético de la siguiente manera
 
 \begin{eqnarray}
-    \vec{B}(\vec{r},t) = \int \vec{g}(\vec{r},\vec{\xi},t)d\vec{\xi}
+    \vec{B}(\vec{r},t) = \int \vec{g}(\vec{r},\vec{\zeta},t)d\vec{\zeta}
 \end{eqnarray}
 
-Se le exige a tal función que satisfaga la ecuación de evolución vectorial BGK, como sigue
+\noindent Se le exige a tal función que satisfaga la ecuación de evolución vectorial BGK, como sigue
 
 \begin{eqnarray}
-    \frac{\partial \vec{g}}{\partial t} = \vec{\xi}\cdot\nabla\vec{g} = -\frac{1}{\tau_{m}}(\vec{g}-\vec{g^{(o)}})
+    \label{LBMHD}
+    \frac{\partial \vec{g}}{\partial t} + \vec{\zeta_{i}}\cdot\nabla\vec{g} = -\frac{1}{\tau_{m}}(\vec{g}-\vec{g^{(o)}})
 \end{eqnarray}
 
-que para cada componente cumple la ecuacion BGK escalar. 
+\noindent que para cada componente cumple la ecuación BGK escalar. Se usa un tiempo de relajación diferente al hidrodinámico $\tau_{m} \neq \tau$. Las ecuaciones de Lattice Boltzmann se construyen de manera empírica con el fin de poder representar funciones de distribución continuas por ejemplo la ecuación de momento MHD \eqref{LFMS} que no considera la viscocidad se puede escribir de la siguiente manera
+
+\begin{eqnarray}
+    \frac{\partial(\rho u_{i})}{\partial t}+\frac{\partial}{\partial x_{k}}\left[\rho u_{i}u_{k}+\left(p+\frac{1}{2\mu_{o}}B^{2}\right)\delta_{ik}-\frac{1}{\mu_{o}}B_{i}B_{k}\right] = 0
+\end{eqnarray}
+
+\noindent La fuerza de Lorentz $\vec{J}\times\vec{B}$ puede ser expresada como el Tensor de Stress de Maxwell, dado por la siguiente expresión
+
+\begin{eqnarray}
+    M_{\alpha\beta} = \frac{1}{2}B^{2}\delta_{\alpha\beta}-B_{\alpha\beta}
+\end{eqnarray}
+
+\noindent Basados en la expansión de la distribución de equilibrio sobre una base funcional de polinomios de Hermite \cite{kruger}\cite{Dellar} , en dos dimensiones. En el nivel mesoscópico el fluido se estudia a través de la función de distribución $f(\vec{r},\vec{\xi},t)$ el cual cumple la ecuación de evolución BGK incluyendo un término de forzamiento que está relacionado con la fuerza de Lorentz
+
+\begin{eqnarray}
+    \frac{\partial f}{\partial t} + \vec{\xi}\cdot\nabla f + \vec{a}\cdot\nabla_{\xi}f=-\left(\frac{1}{\tau}\right)(f-f^{eq})
+\end{eqnarray}
+
+\noindent donde $\vec{\xi}$ y $\vec{a}$ son la velocidad mesoscópica y la aceleración, respectivamente. La aceleración es impuesta bajo un potencial externo bajo la formulación MHD. La forma explicita de los términos expuestos en la ecuación de evolución tiene la siguiente forma
+
+\begin{eqnarray}
+    f_{i}^{(0)} = \rho w_{i}\left(1+\frac{(\vec{\xi_{i}}\cdot\vec{u})}{\theta}+\frac{(\vec{\xi_{i}}\cdot\vec{u})^{2}}{2\theta^{2}}-\frac{u^{2}}{2\theta}\right)
+\end{eqnarray}
+
+y el termino de aceleración 
+
+\begin{eqnarray}
+    \vec{a}\cdot\nabla_{\xi}f_{i} = -\frac{w_{i}\rho}{\theta^{2}}\left(\vec{\xi}_{i}-\vec{u}+\frac{\vec{\xi}_{i}\cdot\vec{u}}{\theta^{2}}\right)\cdot(\vec{J}\times\vec{B})
+\end{eqnarray}
+
+\noindent para completar la descripción MHD se debe considerar la función vectorial de distribución planteada debido a la asimetria del campo eléctrico, en las ecuaciones de Maxwell. Se considera que el campo magnético se construye sobre funciones de distribución en una cierta malla, tal y como se describo en la formulación hidrodinámica, sin embargo ahora como una función vectorial
+
+\begin{eqnarray}
+    \vec{B} = \sum_{i=0}^{M}\vec{g}_{i}
+\end{eqnarray}
+
+\noindent entonces $\vec{g}_{i}$ cumple la ecuación de BGK de evolución \eqref{LBMHD} para alguna función de equilibrio vectorial $\vec{g}_{i}^{(0)}$. Cuando se considera las velocidades del Lattice $\vec{\zeta}$ se asocia con pesos $W_{i}$ y velocidad del sonido de $\theta$
