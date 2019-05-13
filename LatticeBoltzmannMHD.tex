@@ -176,12 +176,48 @@ Entonces el paso de tiempo en el sistema esta dado por la siguiente expresión ,
 Estas expresiones son las que se utilizan en el programa computacional por facilidad en el calculo del paso del tiempo. Se definen a partir de las variables propuestas y son usadas para el calculo de las variables macroscópicas, de la siguiente manera
 
 \begin{eqnarray}
-    \rho = \sum_{i=0}^{N}\overline{f}_{i}\\
-    \rho\vec{u}=\sum_{i=0}^{N}\vec{\xi}_{i}\ \overline{f}_{i}\\
-    \left(1+\frac{\Delta t}{2\tau}\right)\overleftrightarrow{\Pi}
+    \rho &=& \sum_{i=0}^{N}\overline{f}_{i}\\
+    \rho u_{\alpha}&=&\sum_{i=0}^{N}\xi_{i\alpha}\ \overline{f}_{i}\\
+    \left(1+\frac{\Delta t}{2\tau}\right)\Pi_{\alpha\beta}&=&\sum_{i=0}^{N}\xi_{i\alpha}\xi_{i\beta}\overline{f}_{i}+\frac{\Delta t}{2\tau}\Pi_{\alpha\beta}^{(0)}\\
+    B_{\alpha} &=& \sum_{i = 0}^{M}\overline{g}_{i\alpha}\\
+    \left(1+\frac{\Delta t }{2\tau_{m}}\right)\Lambda_{\alpha\beta}&=&\sum_{i=0}^{M}\zeta_{i\alpha}\zeta_{i\beta}+ \frac{\Delta t}{2\tau_{m}}\Delta_{\alpha\beta}^{(0)}
 \end{eqnarray}
 
-
+\noindent A partir de las anteriores expresiones se calculan las cantidades macroscópicas en la implementación computacional
 \noindent 
 
 \section{Flujo de Hartmann}
+
+\noindent Para poder hacer un test de el modelo propuesto en el capítulo anterior se debe contrastar con una solución teórica de las ecuaciones ideales de la magnetohidrodinámica, para tal fin se considera el llamado flujo de Hartmann. Es un flujo unidireccional a través de un canal, eléctricamente conductor al cual se le aplica un campo magnético transversal. Es el análogo MHD al flujo de Poiseuille estudiado anteriormente en la hidrodinámica, tal y como en el flujo de Pouiseuille la geometría y consideraciones del sistema permiten una reducción de las ecuaciones y de esta manera tener una solución analítica. Trabajamos sobre las ecuaciones del sistema desarrolladas anteriormente 
+
+\begin{eqnarray}
+    \frac{\partial(\rho u_{i})}{\partial t}+\frac{\partial}{\partial x_{k}}\left[\rho u_{i}u_{k}+\left(p+\frac{1}{2\mu_{o}}B^{2}\right)\delta_{ik}-\frac{1}{\mu_{o}}B_{i}B_{k}\right] &=& \frac{\partial \sigma_{ik}}{\partial x_{k}}\\
+    \frac{\partial B_{i}}{\partial t} + \frac{\partial}{\partial x_{j}}(v_{i}B_{j}-v_{j}B_{i}) &=& \frac{\eta}{\mu_{o}}\frac{\partial^{2}B_{i}}{\partial x_{j}^{2}}
+\end{eqnarray}
+
+\noindent se considera que las velocidades en el canal solamente dependen de la coordenada en $y$ $\vec{u} = (0,u(x),0)$ y el campo magnético se mantiene a lo largo de la componente $x$ de la siguiente manera
+$\vec{B} = (B_{o},b(x),0)$. Entonces desarrollando cada componente de la ecuación de inducción 
+
+\begin{eqnarray}
+    \frac{\partial B_{x}}{\partial t} + \frac{\partial}{\partial x}\left(u_{x}B_{x}-B_{x}u_{x}\right)+\frac{\partial}{\partial y}\left(u_{x}B_{y}-B_{x}u_{y}\right)+\frac{\partial}{\partial z}\left(u_{x}B_{z}-B_{x}u_{z}\right) \nonumber \\
+    =\eta\left(\frac{\partial^{2}B_{x}}{\partial x^{2}} +\frac{\partial^{2}B_{x}}{\partial y^{2}} +\frac{\partial^{2}B_{x}}{\partial z^{2}}\right)\\
+    \frac{\partial B_{y}}{\partial t} + \frac{\partial}{\partial x}\left(u_{y}B_{x}-B_{y}u_{x}\right)+\frac{\partial}{\partial y}\left(u_{y}B_{y}-B_{y}u_{y}\right)+\frac{\partial}{\partial z}\left(u_{y}B_{z}-B_{y}u_{z}\right) \nonumber \\
+    =\eta\left(\frac{\partial^{2}B_{y}}{\partial x^{2}} +\frac{\partial^{2}B_{y}}{\partial y^{2}} +\frac{\partial^{2}B_{y}}{\partial z^{2}}\right)\\
+    \frac{\partial B_{z}}{\partial t} + \frac{\partial}{\partial x}\left(u_{z}B_{x}-B_{z}u_{x}\right)+\frac{\partial}{\partial y}\left(u_{z}B_{y}-B_{z}u_{y}\right)+\frac{\partial}{\partial z}\left(u_{z}B_{z}-B_{z}u_{z}\right) \nonumber \\
+    =\eta\left(\frac{\partial^{2}B_{z}}{\partial x^{2}} +\frac{\partial^{2}B_{z}}{\partial y^{2}} +\frac{\partial^{2}B_{z}}{\partial z^{2}}\right)
+\end{eqnarray}
+
+\noindent se llega a la siguiente ecuación, en donde la única ecuación que se tiene es en la componente $y$
+
+\begin{eqnarray}
+    0=B_{o}\frac{du}{dx}+\eta\frac{d^{2}b}{dx^{2}}
+\end{eqnarray}
+
+Ahora para el momento 
+
+\begin{eqnarray}
+     \frac{\partial(\rho u_{x})}{\partial t}+\frac{\partial}{\partial x}\left(\rho u_{x}u_{x}+\left(p+\frac{1}{2\mu_{o}}B^{2}\right)-\frac{B_{x}B_{x}}{\mu_{o}}\right) + \frac{\partial}{\partial y}\left(\rho u_{x}u_{y}-\frac{B_{x}B_{y}}{\mu_{o}}\right)+\nonumber\\
+     \frac{\partial}{\partial z}\left(\rho u_{x}u_{z}-\frac{B_{x}B_{z}}{\mu_{o}}\right)= \eta\left[\frac{\partial}{\partial x}\left(\frac{\partial u_{x}}{\partial x}+\frac{\partial u_{x}}{\partial x}\right)+\left.\\
+     \right.
+     +\frac{\partial}{\partial y}\left(\frac{\partial u_{x}}{\partial y}+\frac{\partial u_{y}}{\partial x}\right)+\frac{\partial}{\partial z}\left(\frac{\partial u_{x}}{\partial z}+\frac{\partial u_{z}}{\partial x}\right)\right]
+\end{eqnarray}
