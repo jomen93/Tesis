@@ -1,6 +1,8 @@
 \chapter{Lattice Boltzmann (MHD)}
 
 
+\section{Ecuación de inducción en el lattice}
+
 \noindent Los métodos basado en las ecuaciones de Lattice Boltzmann prometen ser una alternativa muy fuerte en la simulación de fluidos computacionales, usando un espacio de velocidades y truncando la ecuación de Boltzmann a partir de la teoría cinética de gases. Tales métodos atacan a sistemas hiperbólicos lineales de coeficiente constantes con términos fuente no lineales. Se tienen entonces pocas aplicaciones en MHD y modelos implementados para estudiar problemas dinámicos del plasma solar. Este trabajo se basa en la propuesta de Dellar \cite{Dellar} que introduce una función de distribución vectorial en lugar de una función de distribución escalar como se hace corrientemente \cite{kruger}.  
 
 \noindent se puede ver que la evolución del campo magnético $\vec{B}$ es determinado por el campo eléctrico asociado a través de la ecuación de inducción
@@ -25,7 +27,7 @@
 
 \begin{eqnarray}
     \label{LBMHD}
-    \frac{\partial \vec{g}}{\partial t} + \vec{\zeta_{i}}\cdot\nabla\vec{g} = -\frac{1}{\tau_{m}}(\vec{g}-\vec{g^{(o)}})
+    \frac{\partial g_{i\beta}}{\partial t} + \vec{\zeta_{i\alpha}}\frac{\partial g_{i\beta}}{\partial x_{\alpha}} = -\frac{1}{\tau_{m}}(g_{i\beta}-g_{i\beta}^{(0})
 \end{eqnarray}
 
 \noindent que para cada componente cumple la ecuación BGK escalar. Se usa un tiempo de relajación diferente al hidrodinámico $\tau_{m} \neq \tau$. Las ecuaciones de Lattice Boltzmann se construyen de manera empírica con el fin de poder representar funciones de distribución continuas por ejemplo la ecuación de momento MHD \eqref{LFMS} que no considera la viscocidad se puede escribir de la siguiente manera
@@ -64,4 +66,122 @@ y el termino de aceleración
     \vec{B} = \sum_{i=0}^{M}\vec{g}_{i}
 \end{eqnarray}
 
-\noindent entonces $\vec{g}_{i}$ cumple la ecuación de BGK de evolución \eqref{LBMHD} para alguna función de equilibrio vectorial $\vec{g}_{i}^{(0)}$. Cuando se considera las velocidades del Lattice $\vec{\zeta}$ se asocia con pesos $W_{i}$ y velocidad del sonido de $\theta$
+\noindent entonces $\vec{g}_{i}$ cumple la ecuación de BGK de evolución \eqref{LBMHD} para alguna función de equilibrio vectorial $\vec{g}_{i}^{(0)}$. Cuando se considera las velocidades del Lattice $\vec{\zeta}$ se asocia con pesos $W_{i}$ y velocidad del sonido de $\theta$. Es importante notar que el Lattice utilizados para la función vectorial relacionada con el campo mgnético es diferente al de la evolución hidrodinámica, y se utilizará de tal manera que los nodos sean coincidentes para evitar usar interpolación entre cantidades tales como $\vec{u}$ y $\vec{B}$. El tiempo de relajación magnético propuesto $\tau_{m}$ puede ser diferente del tiempo de relajación hidrodinámico esto con el fin de poder ajustar independientemente la resistividad de la viscocidad.
+
+\medskip
+
+\noindent Para poder encontrar la forma de la función de equilibrio se hace una expansión  de Chapman-Enskog en términos de un pequeño parámetro $\epsilon$ de manera análoga que en el caso hidrodinámico
+
+\begin{eqnarray}
+    \vec{g} = \vec{g}^{(0)} + \epsilon\vec{g}^{(1)} + \epsilon^{2}\vec{g}^{(2)}+\cdots\qquad \frac{\partial}{\partial t} = \frac{\partial}{\partial t_{0}} + \epsilon\frac{\partial}{\partial t_{1}}+\cdots
+\end{eqnarray}
+
+\noindent donde $t_{0}$ y $t_{1}$ son los tiempos advectivos y difusivos, respectivamente. Se hace necesario imponer la condición de solución del Lattice
+
+\begin{eqnarray}
+    \label{condicionesLBM}
+    \sum_{i=0}^{M}\vec{g}_{i}^{(1)} = \sum_{i=0}^{(2)} = \cdots=0
+\end{eqnarray}
+
+\noindent Entonces se considera que los términos de mayor orden en la expansión no contribuyen al campo magnético macroscópico. A partir de este punto se obtiene las ecuaciones de los dos primeros momentos
+
+\begin{eqnarray}
+    \left(\frac{\partial}{\partial t_{0}}+\zeta_{i}\cdot\nabla\right)\vec{g}_{i}^{(0)} = -\frac{1}{\tau_{m}}\vec{g}_{i}^{(1)}\\
+    \frac{\partial \vec{g}_{i}^{(0)}}{\partial t_{1}}\vec{g}_{i}^{(0)}+\left(\frac{\partial}{\partial t_{0}}+\zeta_{i}\cdot\nabla\right)\vec{g}_{i}^{(1)} = -\frac{1}{\tau_{m}}\vec{g}_{i}^{(2)}
+\end{eqnarray}
+
+\noindent A partir de las anteriores ecuaciones y teniendo en cuenta las condiciones impuestas en \eqref{condicionesLBM} se obtiene la ecuación de evolución del campo magnético de la siguiente forma
+
+\begin{eqnarray}
+    \label{1ermomentoMHD}
+    \frac{\partial \vec{B}_{\beta}}{\partial t} + \frac{\partial}{\partial x_{\alpha}}\left(\Lambda_{\alpha\beta}^{(0)}+\epsilon\Lambda_{\alpha\beta}^{(1)}\right) = 0
+\end{eqnarray}
+
+\noindent y los tensores están definidos por los primeros momentos de la expansión 
+
+\begin{eqnarray}
+    \Lambda_{\alpha\beta}^{(n)}=\sum_{i=0}^{(0)} = \zeta_{i\alpha}g_{i\beta}^{(n)}\quad \text{para}\quad n=0,1,\cdots
+\end{eqnarray}
+
+Al igual que en el caso hidrodinámico se tiene una ecuación cuando se comparan el primer orden de 
+
+\begin{eqnarray}
+    \frac{\partial}{\partial t_{0}}\Lambda_{\alpha\beta}^{(0)}+\frac{\partial}{\partial x_{\gamma}}\left(\sum_{i=0}^{M}\zeta_{i\gamma}\zeta_{i\alpha}g_{i\beta}^{(0)}\right) = -\frac{1}{\tau_{m}}\Lambda_{\alpha\beta}^{(1)}
+\end{eqnarray}
+
+\noindent para poder tener una ecuación que equivale al caso ideal MHD se considera $\epsilon = 0$ en la ecuación \eqref{1ermomentoMHD} de tal manera que que sea coincidente con la ecuación de inducción escrita en términos del campo magnético \eqref{induccionMHD}, esto sugiere que el campo magnético macroscópico y los momentos de orden superior se definen de la siguiente forma
+
+\begin{eqnarray}
+    B_{\beta} &=& \sum_{i=0}^{M}g_{i\beta}\\
+    \Lambda_{\alpha\beta}^{(0)} = \sum_{i=0}^{M}&=&\sum_{i=0}^{M}zeta_{i\alpha}g_{i\beta}^{(0)}=u_{\alpha}B_{\beta}-B_{\alpha}u_{\beta}
+\end{eqnarray}
+
+\noindent para analizar los sistemas MHD se sigue la elección propuesta por Dellar\cite{Dellar} para la función vectorial de distribución
+
+\begin{eqnarray}
+    g_{i\beta} = W_{i}\left[B_{\beta}+\frac{\zeta_{i\alpha}}{\theta_{m}}(u_{\alpha}B_{\beta}-B_{\alpha}u_{\beta})\right]
+\end{eqnarray}
+
+\noindent en donde $\alpha$ y $\beta$ toman valores de las tres componentes cartesianas , considerando que $\alpha\neq\beta$. Los valores de $\theta_{m}$, $W_{i}$ y $\zeta_{i}$ dependen de el lattice considerado en la simulación del campo magnético, que satisfacen 
+
+\begin{eqnarray}
+    \sum_{i=0}^{M}W_{i}=1 \quad \sum_{i=0}^{M}W_{i}\zeta_{i\alpha}\zeta_{i\beta}=\theta_{m}\delta_{\alpha\beta}
+\end{eqnarray}
+
+\noindent la simetría del Lattice asegura que el primer y tercer momento van a cero , en particular para la función de distribución de equilibrio se tiene 
+
+\begin{eqnarray}
+    \sum_{i=0}^{M}W_{i}\zeta_{i\alpha}\zeta_{i\beta}g_{i\beta}^{(0)}=\theta_{m}\delta_{\alpha\beta}B_{\beta}
+\end{eqnarray}
+
+\noindent un ventaja importante en el calculo del campo magnético es que se necesitan  menos velocidades discretas para asegurar la exactitud del resultado. 
+
+\section{Forma discreta de las ecuaciones del sistema}
+
+\noindent Para poder discretizar la ecuación de evolución hidrodinámica \eqref{latticeFluidos} y MHD \eqref{LBMHD} en el espacio , velocidades y tiempo, se integran a través de caminos particulares en las velocidades mesoscópicas en un paso de tiempo $\Delta t$
+
+\begin{eqnarray}
+    f_{i}(\vec{r}+\vec{\xi}_{i}\Delta t, t+\Delta t) - f_{i}(\vec{r},t)=\qquad\nonumber\\
+    \qquad \int_{o}^{\Delta t}-\frac{1}{\tau}\left[f_{i}(\vec{r}+\vec{\xi}_{i}s,t+s)-f_{i}^{(0)}(\vec{r}+\vec{\xi}_{i}s,t+s)\right]ds\\
+    g_{i\beta}(\vec{r}+\vec{\zeta}_{i}\Delta t, t+\Delta t) - g_{i\beta}(\vec{r},t)=\qquad\nonumber\\
+    \qquad\int_{o}^{\Delta t}-\frac{1}{\tau}\left[g_{i\beta}(\vec{r}+\vec{\zeta}_{i}s,t+s))-g_{i\beta}^{(0)}(\vec{r}+\vec{\xi}_{i}s,t+s))\right]ds
+\end{eqnarray}
+
+Para realizar la integración se utiliza una regla trapezoidal de segundo orden , obteniendo
+
+\begin{eqnarray}
+    -\frac{1}{\tau}\int_{0}^{\Delta t}\left[\cdots\right]ds = -\frac{1}{\tau}\frac{\Delta t}{2}\left(f_{i}(\vec{r}+\vec{\xi}_{i}\Delta t,t+\Delta t)-f_{i}^{(0)}(\vec{r}+\vec{\xi}_{i}\Delta t,t+\Delta t)\nonumber \right.\\
+    \left. +f_{i}(\vec{r},t)-f_{i}^{(0)}(\vec{r}, t)
+    \right) + \mathcal{O}(\Delta t^{3})\\
+      -\frac{1}{\tau}\int_{0}^{\Delta t}\left[\cdots\right]ds = -\frac{1}{\tau}\frac{\Delta t}{2}\left(g_{i\beta}(\vec{r}+\vec{\zeta}_{i}\Delta t,t+\Delta t)-g_{i\beta}^{(0)}(\vec{r}+\vec{\zeta}_{i\beta}\Delta t,t+\Delta t)\nonumber \right.\\
+    \left. +g_{i\beta}(\vec{r},t)-f_{i}^{(0)}(\vec{r}, t)
+    \right) + \mathcal{O}(\Delta t^{3})
+\end{eqnarray}
+
+\noindent Esta forma discreta tiene una desventaja , el término $f_{i}^{(0)}(\vec{r}+\vec{\xi}_{i}\Delta t,t+\Delta t)$ contiene términos que no se conocen en el paso de tiempo t, dado que que depende de $f_{i}(\vec{r}+\vec{\xi}_{i}\Delta t,t+\Delta t)$ y de $g_{i\beta}(\vec{r}+\vec{\xi}_{i}\Delta t,t+\Delta t)$ que a su vez se calculan desde las variables macroscópicas del sistema $\rho$, $\vec{B}$, $\vec{u}$ evaluadas en el tiempo $t+\Delta t$. Se tiene entonces un sistema de ecuaciones no lineales acopladas, a partir de la combinación de estas dos expresiones obtenidas de la integración se puede encontrar $f_{i}$ y $g_{i}$ en el tiempo $t+\Delta t$. El objetivo es volver el sistema completamente explícito para que al momento de implementar se más sencillo que un esquema implicito, para esto se hace el siguiente cambio de varibales introduciendo las variables $\overline{f}_{i}$ y $\overline{g}_{i}$ definidas por la siguiente expresión 
+
+\begin{eqnarray}
+    \overline{f}_{i}(\vec{r},t) &=& f_{i}(\vec{r},t) + \frac{\Delta t}{2\tau}\left(f_{i}(\vec{r},t)-f_{i}^{(0)}(\vec{r},t)\right) \\
+    \overline{g}_{i\beta}(\vec{r},t) &=& g_{i\beta}(\vec{r},t) + \frac{\Delta t}{2\tau}\left(g_{i\beta}(\vec{r},t)-g_{i\beta}^{(0)}(\vec{r},t)\right)
+\end{eqnarray}
+
+
+Entonces el paso de tiempo en el sistema esta dado por la siguiente expresión , el cual contiene la evolución de las ecuaciones de lattice Boltzmann en la parte hidrodinámica y MHD utilizando la regla del trapecio
+
+\begin{eqnarray}
+    \overline{f_{i}}(\vec{r}+\vec{\xi}_{i}\Delta t,t+\Delta t) = \overline{f}_{i}(\vec{r},t) - \frac{\Delta t}{\tau+\Delta t/2}\left(f_{i}(\vec{r},t)-f_{i}^{(0)}(\vec{r},t)\right)\\
+    \overline{g}_{i\beta}(\vec{r}+\vec{\zeta}_{i}\Delta t,t+\Delta t) = \overline{g}_{i\beta}(\vec{r},t) - \frac{\Delta t}{\tau_{m}+\Delta t/2}\left(g_{i\beta}(\vec{r},t)-g_{i\beta}^{(0)}(\vec{r},t)\right)
+\end{eqnarray}
+
+Estas expresiones son las que se utilizan en el programa computacional por facilidad en el calculo del paso del tiempo. Se definen a partir de las variables propuestas y son usadas para el calculo de las variables macroscópicas, de la siguiente manera
+
+\begin{eqnarray}
+    \rho = \sum_{i=0}^{N}\overline{f}_{i}\\
+    \rho\vec{u}=\sum_{i=0}^{N}\vec{\xi}_{i}\ \overline{f}_{i}\\
+    \left(1+\frac{\Delta t}{2\tau}\right)\overleftrightarrow{\Pi}
+\end{eqnarray}
+
+
+\noindent 
+
+\section{Flujo de Hartmann}
