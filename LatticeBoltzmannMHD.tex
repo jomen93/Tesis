@@ -166,14 +166,14 @@ Para realizar la integración se utiliza una regla trapezoidal de segundo orden 
 \end{eqnarray}
 
 
-Entonces el paso de tiempo en el sistema esta dado por la siguiente expresión , el cual contiene la evolución de las ecuaciones de lattice Boltzmann en la parte hidrodinámica y MHD utilizando la regla del trapecio
+\noindent Entonces el paso de tiempo en el sistema esta dado por la siguiente expresión , el cual contiene la evolución de las ecuaciones de lattice Boltzmann en la parte hidrodinámica y MHD utilizando la regla del trapecio
 
 \begin{eqnarray}
-    \overline{f_{i}}(\vec{r}+\vec{\xi}_{i}\Delta t,t+\Delta t) = \overline{f}_{i}(\vec{r},t) - \frac{\Delta t}{\tau+\Delta t/2}\left(f_{i}(\vec{r},t)-f_{i}^{(0)}(\vec{r},t)\right)\\
-    \overline{g}_{i\beta}(\vec{r}+\vec{\zeta}_{i}\Delta t,t+\Delta t) = \overline{g}_{i\beta}(\vec{r},t) - \frac{\Delta t}{\tau_{m}+\Delta t/2}\left(g_{i\beta}(\vec{r},t)-g_{i\beta}^{(0)}(\vec{r},t)\right)
+    \overline{f_{i}}(\vec{r}+\vec{\xi}_{i}\Delta t,t+\Delta t) = \overline{f}_{i}(\vec{r},t) - \frac{\Delta t}{\tau+\Delta t/2}\left(\overline{f}_{i}(\vec{r},t)-f_{i}^{(0)}(\vec{r},t)\right)\\
+    \overline{g}_{i\beta}(\vec{r}+\vec{\zeta}_{i}\Delta t,t+\Delta t) = \overline{g}_{i\beta}(\vec{r},t) - \frac{\Delta t}{\tau_{m}+\Delta t/2}\left(\overline{g}_{i\beta}(\vec{r},t)-g_{i\beta}^{(0)}(\vec{r},t)\right)
 \end{eqnarray}
 
-Estas expresiones son las que se utilizan en el programa computacional por facilidad en el calculo del paso del tiempo. Se definen a partir de las variables propuestas y son usadas para el calculo de las variables macroscópicas, de la siguiente manera
+\noindent Estas expresiones son las que se utilizan en el programa computacional por facilidad en el calculo del paso del tiempo. Se definen a partir de las variables propuestas y son usadas para el calculo de las variables macroscópicas, de la siguiente manera
 
 \begin{eqnarray}
     \rho &=& \sum_{i=0}^{N}\overline{f}_{i}\\
@@ -217,7 +217,28 @@ Ahora para el momento
 
 \begin{eqnarray}
      \frac{\partial(\rho u_{x})}{\partial t}+\frac{\partial}{\partial x}\left(\rho u_{x}u_{x}+\left(p+\frac{1}{2\mu_{o}}B^{2}\right)-\frac{B_{x}B_{x}}{\mu_{o}}\right) + \frac{\partial}{\partial y}\left(\rho u_{x}u_{y}-\frac{B_{x}B_{y}}{\mu_{o}}\right)+\nonumber\\
-     \frac{\partial}{\partial z}\left(\rho u_{x}u_{z}-\frac{B_{x}B_{z}}{\mu_{o}}\right)= \eta\left[\frac{\partial}{\partial x}\left(\frac{\partial u_{x}}{\partial x}+\frac{\partial u_{x}}{\partial x}\right)+\left.\\
-     \right.
-     +\frac{\partial}{\partial y}\left(\frac{\partial u_{x}}{\partial y}+\frac{\partial u_{y}}{\partial x}\right)+\frac{\partial}{\partial z}\left(\frac{\partial u_{x}}{\partial z}+\frac{\partial u_{z}}{\partial x}\right)\right]
+     \frac{\partial}{\partial z}\left(\rho u_{x}u_{z}-\frac{B_{x}B_{z}}{\mu_{o}}\right)= \eta\left[\frac{\partial}{\partial x}\left(\frac{\partial u_{x}}{\partial x}+\frac{\partial u_{x}}{\partial x}\right) \right.\nonumber\\
+     \left.+\frac{\partial}{\partial y}\left(\frac{\partial u_{x}}{\partial y}+\frac{\partial u_{y}}{\partial x}\right)+\frac{\partial}{\partial z}\left(\frac{\partial u_{x}}{\partial z}+\frac{\partial u_{z}}{\partial x}\right)\right]\\
+     \frac{\partial(\rho u_{y})}{\partial t}+\frac{\partial}{\partial x}\left(\rho u_{y}u_{x}-\frac{B_{y}B_{x}}{\mu_{o}}\right) + \frac{\partial}{\partial y}\left(\rho u_{y}u_{y}+\left(p+\frac{1}{2\mu_{o}}B^{2}\right)-\frac{B_{y}B_{y}}{\mu_{o}}\right)+\nonumber\\
+     \frac{\partial}{\partial z}\left(\rho u_{y}u_{z}-\frac{B_{y}B_{z}}{\mu_{o}}\right)= \eta\left[\frac{\partial}{\partial x}\left(\frac{\partial u_{y}}{\partial x}+\frac{\partial u_{y}}{\partial y}\right) \right.\nonumber\\
+     \left.+\frac{\partial}{\partial y}\left(\frac{\partial u_{y}}{\partial y}+\frac{\partial u_{y}}{\partial y}\right)+\frac{\partial}{\partial z}\left(\frac{\partial u_{y}}{\partial z}+\frac{\partial u_{z}}{\partial y}\right)\right]\\
+     \frac{\partial(\rho u_{z})}{\partial t}+\frac{\partial}{\partial x}\left(\rho u_{z}u_{x}-\frac{B_{z}B_{x}}{\mu_{o}}\right) + \frac{\partial}{\partial y}\left(\rho u_{z}u_{y}-\frac{B_{z}B_{y}}{\mu_{o}}\right)+\nonumber\\
+     \frac{\partial}{\partial z}\left(\rho u_{z}u_{z}+\left(p+\frac{1}{2\mu_{o}}B^{2}\right)-\frac{B_{z}B_{z}}{\mu_{o}}\right)= \eta\left[\frac{\partial}{\partial x}\left(\frac{\partial u_{z}}{\partial x}+\frac{\partial u_{x}}{\partial z}\right) \right.\nonumber\\
+     \left.+\frac{\partial}{\partial y}\left(\frac{\partial u_{z}}{\partial y}+\frac{\partial u_{y}}{\partial z}\right)+\frac{\partial}{\partial z}\left(\frac{\partial u_{z}}{\partial z}+\frac{\partial u_{z}}{\partial z}\right)\right]
 \end{eqnarray}
+
+\noindent Se puede ver que $B^{2} = B_{o}^{2}+b^{2}(x)$, además las condiciones del sistema hace que solamente se tenga componente en la dirección $y$, de tal manera se consiguen las ecuaciones diferenciales a resolver
+
+\begin{eqnarray}
+     0 &=& F + \rho\nu\frac{d^{2}}{dx^{2}}+B_{o}\frac{db}{dx}\\
+     0&=&B_{o}\frac{du}{dx} + \eta\frac{d^{2}b}{dx^{2}}
+\end{eqnarray}
+
+\noindent $F$ representa una fuerza uniforme a lo largo de la dirección del canal y se puede considerar como el gradiente de presión debido a la fuerza gravitacional. Asumiendo paredes rígidas, que la velocidad y el campo son cero en las paredes y condiciones de conducción se llega a las siguientes expresiones analíticas
+
+\begin{eqnarray}
+     u(x) &=& \frac{FL}{\sqrt{\rho}B_{o}}\sqrt{\frac{\eta}{\nu}}\coth(H)\left(1-\frac{\cosh(Hx/L)}{\cosh(H)}\right)\\
+     b(x) &=& \frac{FL}{B_{o}}\left(\frac{\sinh(Hx/L)}{\sinh(H)}-\frac{x}{L}\right)
+\end{eqnarray}
+
+\noindent $H=B_{o}L/\sqrt{\rho\eta\nu}$ es el número de Hartmann, un parámetro adimensional que mide la relación entre la fuerza de Lorentz y la fuerza viscosa. Cuando el número de HArtmann es alto se puede considerar un liquido característico MHD, por otra parte cuandoel número de Hartmann es pequeño tenemos la aproximación obtenida anteriormente para el flujo de Pouseuille 
