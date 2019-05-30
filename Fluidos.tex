@@ -193,9 +193,105 @@ estas trayectorias se determinaron numéricamente con un esquema Euler hacia ade
 
 \noindent Se trata entonces principalmente de un problema de decisión tenemos varias opciones. Sí se asume que $T=\infty$ por un tiempo pequeño entonces la solución existe y es regular. Esto fue demostrado por Lery en 1933. Ahora si $\vec{u}_{o}$ es fuertemente oscilante también es regular y existe la solución, sin embargo si el problema del colapso de la solución fuese cierto y una solución no pudiera ser calculada más allá de un tiempo $T>0$, entonces la velocidad se debe hacer infinita cuando $t\rightarrow T$, por tanto es una contrariedad física, dado que la energía sería infinita. Este tópico es un tema de investigación de vanguardia dado que no se tiene unicidad para las soluciones de sistemas físicos que involucren las ecuaciones de Navier-Stokes.
 
-\subsection{Teoría de la turbulencia homogenea}
+\subsection{Escalas de Turbulencia }
+
+\noindent Se considera un flujo completamente turbulento con un número de Reynolds\footnote{Se recuerda que el número de Reynolds está dado por $R = \frac{\mathcal{U}\mathcal{L}}{\nu}$} alto con una velocidad característica $\mathcal{U}$ y longitud característica $\mathcal{L}$. EL primer concepto que se va a considerar que que la turbulencia puede entenderse como una composición de remolinos con diferentes tamaños.
+El tamaño de los remolines está dado por una longitud característica $l_{o}$ la cual es comparable con la escala de fluido $\mathcal{L}$y con una velocidad característica $u(l_{o})$ la cual es comparable con $\mathcal{U}$ ademas con número de Reynolds $Re_{o} = u_{o}l_{o}/\nu$.(que es largo comparado con $Re$).
+
+\medskip
+
+\noindent Richardson fue el primero en proponer la idea de la cascada de energía, esta noción consiste en plantear que los remolinos grandes son inestales y se rompen, transfiriendo energía a remolinos más pequeños. Estos remolinos más pequeños también tienden a romperse y seguir transportando energía a otro mas pequeños aún, esto es el concepto denominado \emph{Cascada de energía}, en la cual la energía se transmite sucesivamente de remolinos grandes a los más pequeños. La tasa de disipación $\varepsilon$ es determinada por el primer proceso en la secuencia de cascada, la cual es del orden $\sim u_{o}^{2}$ y en la escala del tiempo $\sim l_{o}/u_{o}$, entonces la tasa de transferencia de energía se supone como $u_{o}^{2}/\tau = u_{o}^{3}/l_{o}$ independiente de $\nu$ (siempre con la consideración de número de Reynolds alto).
+
+\medskip
+
+\noindent Para empezar a considerar la hipótesis de Kolmogorov empezando por la pregunta ¿Cual es la longitud característica del remolino más pequeño al cual se le tranfiere energía de uno más grande? Como $l_{o}$ decrece, ¿esto hace que $u(l_{o})$ y $\tau(l_{o})$?. Estas preguntas las trató Kolmogorov que respondió a través de tres hipótesis. La primera hipótesis está relacionada con la isotropía de los movimientos de pequeña escala, en general los remolinos grandes son afectados por las condiciones de frontera y son anisotrópicos, Kolmorogov asegura que la anisotropía se pierde en el proceso de reducción de escala entre remolinos grandes a pequeños
+
+\medskip
+
+\hangindent=0.7cm \textbf{Hipótesis de isotropía local: } A un numero de Reynolds Suficientemente alto, las escalas pequeñas en el movimiento turbulento es estadísticamente isotrópico $(l<<l_{o})$
+
+\noindent en este caso se entiende la escala pequeña bajo la definición $l_{p} \approx (1/6)l_{o}$ \cite{pope}\footnote{Justo acá se hace la deducción de este criterio utillizando el tensor del espectro de la velocidad} como el límite entre las escalas grandes donde se tiene anisotropía en los remolinos y las pequeñas donde se tiene isotropía. Kolmogorov argumenta que las esclas grandes pierden energía pasando está a manera de cascada hacia escalas más bajas, la información sobre la geometría de los grandes remolinos se determina por el campo de velocidades y las condiciones de frontera. 
+
+\medskip
+
+\hangindent=0.7cm \textbf{Primera hipótesis de similaridad de Kolmogorov: }En cada flujo turbulento con un número de Reynolds suficientemente alto , la estadística del movimiento de las pequeñas escalas tiene una forma universal única determinada por $\nu$ y $\varepsilon$
+
+\medskip
+
+\noindent El rango de longitud $l<l_{p}$ está relacionado con una categoría de equilibrio universal, en tal rango las escalas de tiempo del fluido, caracterizadas por $l/u(l)$, son pequeñas comparadas con $l/u_{o}$, de tal manera que los pequeños remolinos se adaptan rápidamente para mantener el equilibrio en la transferencia de energía desde las escalas más altas. Dados los dos parámetros $\varepsilon$ y $\nu$  existen unos parámetros únicos de longitud, velocidad y tiempo que pueden ser formados. Estos son
+
+\begin{eqnarray}
+\eta &=& \left(\frac{\nu^{3}}{\varepsilon}\right)^{1/4}\\
+u_{\eta} &=& (\varepsilon\nu)^{1/4}\\
+\tau_{\eta}&=&\left(\frac{\nu}{\varepsilon}\right)^{1/2}
+\end{eqnarray}
+
+\noindent dos identidades provenientes de la definiciones anteriores indican que las escalas de Kolmogorov se caracterizan por ser muy pequeñas. El número de Reynolds basado en las escalas de Kolmogorov se define como la unidad, es decir, $\eta u){\eta}\nu=1$, que es consistente con la noción de cascada . Por tanto la la tasa de disipación está dada por 
+
+\begin{eqnarray}
+\varepsilon = \nu\left(u_{\eta}\eta\right)^{2}=\frac{\nu}{\tau_{\eta}^{2}}
+\end{eqnarray}
+
+\noindent se evidencia que $(u_{\eta}/\eta)=1$. Las relaciones de las escalas pequeñas y grandes están determinadas por las siguientes definiciones , utilizando el hecho $\varepsilon \sim u_{o}^{3}/l_{o}$
+
+\begin{eqnarray}
+\frac{\eta}{l_{o}}\sim Re^{-3/4},\qquad \frac{u_{\eta}}{u_{o}}\sim Re^{-1/4},\qquad
+\frac{\tau_{\eta}}{\tau_{o}}\sim Re^{-1/2}
+\end{eqnarray}
+
+\noindent entonces se ve que para números de Reynolds altos , las velocidades y tiempo de los remolinos pequeños $u_{\eta}$, $\tau_{\eta}$ son chicos en comparación con los grandes, caracterizados por $u_{o}$ y $\tau_{o}$.
+
+\medskip
+
+\hangindent=0.7cm \textbf{Segunda hipótesis de similaridad de Kolmogorov: }En cada flujo turbulento con un número de Reynolds suficientemente alto ,la estadística del movimiento de escala $l$ en el rango  $l_{o}\gg l \gg\eta$ tiene una forma universal que es determinada unicamente por $\varepsilon$ in tependiente de $\nu$
+
+\medskip
+
+\noindent De igual manera que en el anterior análisis de la primera hipótesis de Kolmogorov se define una longitud de escala dada por $l_{d} = 60\eta$, entonces se trabajara bajo la siguiente región $l_{p}>l>l_{d}$. Esta longitu de escala $l_{d}$ ...
 
 
 
+
+
+\subsection{El espectro de energía}
+
+
+\noindent Queda por estar determinado como la energía cinética turbulenta está distribuida en los remolinos de diferentes tamaños. Considerando una turbulencia homogénea y considerando un función del espectro de energía $E(k)$, la dinámica del movimiento se caracteriza por el número de onda  $k=2\pi/l$ y el rango de números de onda en el cual el sistema se encuentra 
+
+\begin{eqnarray}
+\varepsilon_{(k_{a},k_{b})} = \int_{k_{a}}^{k_{b}}E(k)dk
+\end{eqnarray}
+
+\noindent A partir de esta integral se puede encontrar la tasa de disipación \cite{pope} $\varepsilon$ para el movimiento en el rango de numero de onda $(k_{a},k_{b})$, y está dada por 
+
+\begin{eqnarray}
+\varepsilon_{(k_{a},k_{b})} = \int_{k_{a}}^{k_{b}}2\nu k^{2}E(k)dk
+\end{eqnarray}
+
+\noindent Se considera entonces que la función del espectro de energía  cumple una ley de otencias dada de la siguiente manera
+
+\begin{eqnarray}
+E(k) = Ak^{-p}
+\end{eqnarray}
+
+\noindent donde $A$ y $p$ son constantes. La energía contenida en los número de onda mayor a $k$ son 
+
+\begin{eqnarray}
+k_{k,\infty} = \int_{k}^{\infty}E(k')dk' =\frac{A}{p-1}k^{-(p-1)}
+\end{eqnarray}
+
+\noindent para el caso de $p>1$ la integral converge, mientras que para $p<1$ diverge. De manera análoga se tiene para la disipación 
+
+\begin{eqnarray}
+\varepsilon_{(0,k)}= \int_{0}^{k}2\nu (k')^{2}E(k')dk'=\frac{2\nu A}{3-p}k^{3-p}
+\end{eqnarray}
+
+\noindent para $p<3$, pero la integral diverge para valores $p\geq 3$, entonces , p = 5/3 corresponde al espectro de Kolmogorov para el cual las dos integrales convergen. La cantidad de energía en los altos números de onda decrece como $k\sim k^{-2/3}$ a medida que $k$ aumenta, por otra parte la disipación en los número de onda bajos decrese como $\varepsilon \sim k^{-4/3}$ mientras que k va hacia cero. La primera hipótesis de similaridad de Kolmogorov asegura que $k>k_{p} = 2\pi/l_{p}$. Para la segunda hipótesis se tiene que el espectro de energía es
+
+\begin{eqnarray}
+E(k) = C\varepsilon^{2/3}k^{-5/3}
+\end{eqnarray}
+
+\noindent donde $C$ es una constante universal
 
 
